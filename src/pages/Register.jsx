@@ -1,30 +1,49 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import {
-  doc,
-  setDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
 
 import { auth, db } from "../firebase";
 
+import "./Register.css";
+
 export default function Register() {
   const navigate = useNavigate();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
-  const register = async (e) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     setError("");
-    setSuccess("");
+
+    if (!name.trim()) {
+      setError("Введіть ім'я.");
+      return;
+    }
+
+    if (password.length < 6) {
+      setError("Пароль повинен містити мінімум 6 символів.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError("Паролі не співпадають.");
+      return;
+    }
 
     try {
+      setLoading(true);
+
       const userCredential =
         await createUserWithEmailAndPassword(
           auth,
@@ -32,94 +51,132 @@ export default function Register() {
           password
         );
 
-      await setDoc(
-        doc(db, "users", userCredential.user.uid),
-        {
-          uid: userCredential.user.uid,
-          email,
-          role: "user",
-          balance: 0,
-          status: "active",
-          createdAt: serverTimestamp(),
-        }
-      );
+      const user = userCredential.user;
 
-      setSuccess("✅ Реєстрація успішна!");
+      await updateProfile(user, {
+        displayName: name,
+      });
 
-      setTimeout(() => {
-        navigate("/dashboard");
-      }, 1000);
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        name,
+        email,
+        role: "user",
+        createdAt: serverTimestamp(),
+      });
 
+      navigate("/");
     } catch (err) {
+      console.error(err);
 
       switch (err.code) {
-
         case "auth/email-already-in-use":
-          setError("Користувач із такою електронною поштою вже існує.");
+          setError("Ця електронна пошта вже використовується.");
           break;
 
         case "auth/invalid-email":
-          setError("Невірний формат електронної пошти.");
+          setError("Невірний формат Email.");
           break;
 
         case "auth/weak-password":
-          setError("Пароль повинен містити щонайменше 6 символів.");
+          setError("Пароль занадто слабкий.");
           break;
 
         default:
-          setError("Сталася помилка. Спробуйте ще раз.");
+          setError("Помилка реєстрації.");
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="auth-page">
-      <form className="auth-card" onSubmit={register}>
+    <div className="register-page">
+      <div className="register-card">
 
         <h1>SellAI</h1>
-
-        <p>Створити акаунт</p>
+        <h2>Створити акаунт</h2>
 
         {error && (
-          <div className="auth-error">
+          <div className="register-error">
             {error}
           </div>
         )}
 
-        {success && (
-          <div className="auth-success">
-            {success}
+        <form onSubmit={handleRegister}>
+
+          <input
+            type="text"
+            placeholder="Ім'я"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+
+          <div className="password-box">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+
+            <button
+              type="button"
+              className="show-btn"
+              onClick={() =>
+                setShowPassword(!showPassword)
+              }
+            >
+              {showPassword ? "🙈" : "👁"}
+            </button>
           </div>
-        )}
 
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <div className="password-box">
+            <input
+              type={showConfirmPassword ? "text" : "password"}
+              placeholder="Підтвердіть пароль"
+              value={confirmPassword}
+              onChange={(e) =>
+                setConfirmPassword(e.target.value)
+              }
+            />
 
-        <input
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+            <button
+              type="button"
+              className="show-btn"
+              onClick={() =>
+                setShowConfirmPassword(!showConfirmPassword)
+              }
+            >
+              {showConfirmPassword ? "🙈" : "👁"}
+            </button>
+          </div>
 
-        <button type="submit">
-          Зареєструватися
-        </button>
+          <button
+            type="submit"
+            className="register-btn"
+            disabled={loading}
+          >
+            {loading ? "Створення..." : "Зареєструватися"}
+          </button>
+
+        </form>
 
         <p>
-          Уже є акаунт?{" "}
+          Вже є акаунт?{" "}
           <Link to="/login">
             Увійти
           </Link>
         </p>
 
-      </form>
+      </div>
     </div>
   );
 }

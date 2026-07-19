@@ -1,12 +1,43 @@
-import { createContext, useContext, useState } from "react";
+import {
+    createContext,
+    useContext,
+    useState,
+    useEffect,
+} from "react";
+
+import {
+    loadPlan,
+    savePlan,
+} from "../../services/subscriptionService";
 
 const SubscriptionContext = createContext();
 
 export function SubscriptionProvider({ children }) {
     const [plan, setPlan] = useState("free");
+    const [loading, setLoading] = useState(true);
 
-    const upgradePlan = (newPlan) => {
-        setPlan(newPlan);
+    useEffect(() => {
+        async function initializeSubscription() {
+            try {
+                const savedPlan = await loadPlan();
+                setPlan(savedPlan);
+            } catch (error) {
+                console.error("Failed to load subscription:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        initializeSubscription();
+    }, []);
+
+    const upgradePlan = async (newPlan) => {
+        try {
+            setPlan(newPlan);
+            await savePlan(newPlan);
+        } catch (error) {
+            console.error("Failed to save subscription:", error);
+        }
     };
 
     const isFree = plan === "free";
@@ -20,6 +51,7 @@ export function SubscriptionProvider({ children }) {
         isFree,
         isPro,
         isBusiness,
+        loading,
     };
 
     return (

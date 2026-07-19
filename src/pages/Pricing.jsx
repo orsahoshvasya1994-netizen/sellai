@@ -1,333 +1,231 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import {
-  FaCheck,
-  FaRocket,
-  FaCrown,
-  FaBuilding,
-  FaArrowLeft,
-} from "react-icons/fa";
-
+import { FaCheck, FaCrown, FaRocket, FaBuilding } from "react-icons/fa";
+import { useSubscription } from "../components/context/SubscriptionContext";
 import "./Pricing.css";
-import { checkout } from "../services/stripe";
 
 export default function Pricing() {
-  const navigate = useNavigate();
+  const { plan, upgradePlan } = useSubscription();
 
   const [billing, setBilling] = useState("monthly");
 
   const plans = [
     {
-      id: "starter",
-      title: "Starter",
-      icon: <FaRocket />,
-      color: "#4f8cff",
-      monthly: 19,
-      yearly: 190,
-      description:
-        "Perfect for freelancers and small online stores.",
+      id: "free",
+      name: "Free",
+      icon: <FaCheck />,
+      price: "$0",
+      yearly: "$0",
+      color: "#7c7c7c",
+      popular: false,
       features: [
-        "100 Products",
-        "500 Orders",
-        "100 Customers",
-        "Dashboard",
+        "Up to 50 Products",
+        "Up to 100 Orders",
+        "Basic Dashboard",
         "Basic Analytics",
-        "Cloud Storage",
+        "5 AI Requests / Day",
         "Email Support",
       ],
     },
-
     {
       id: "pro",
-      title: "Pro",
+      name: "Pro",
       icon: <FaCrown />,
-      color: "#6d5dfc",
+      price: "$19",
+      yearly: "$190",
+      color: "#7C5CFC",
       popular: true,
-      monthly: 49,
-      yearly: 490,
-      description:
-        "Best choice for growing businesses.",
       features: [
         "Unlimited Products",
         "Unlimited Orders",
         "Unlimited Customers",
         "Advanced Analytics",
-        "AI Assistant",
-        "Revenue Forecast",
-        "AI Reports",
+        "Unlimited AI Assistant",
         "PDF Export",
         "Excel Export",
         "Priority Support",
       ],
     },
-
     {
       id: "business",
-      title: "Business",
-      icon: <FaBuilding />,
-      color: "#22c55e",
-      monthly: 99,
-      yearly: 990,
-      description:
-        "Complete AI platform for enterprises.",
+      name: "Business",
+      icon: <FaRocket />,
+      price: "$49",
+      yearly: "$490",
+      color: "#0099ff",
+      popular: false,
       features: [
         "Everything in Pro",
-        "Unlimited Team Members",
-        "API Access",
-        "White Label",
-        "Advanced Forecasting",
-        "Dedicated Manager",
+        "Multi User Team",
+        "Roles & Permissions",
+        "REST API",
+        "Forecast AI",
+        "Sales Reports",
+        "Priority AI",
         "24/7 Support",
-        "Custom Reports",
-        "AI Automation",
+      ],
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise",
+      icon: <FaBuilding />,
+      price: "Custom",
+      yearly: "Custom",
+      color: "#00c853",
+      popular: false,
+      features: [
+        "Unlimited Everything",
+        "Dedicated Server",
+        "Custom Integrations",
+        "Personal Manager",
+        "Enterprise AI",
+        "White Label",
+        "Custom Domain",
+        "Premium SLA",
       ],
     },
   ];
 
-  const subscribe = async (plan) => {
-    await checkout(plan);
-  };
-
   return (
     <div className="pricing-page">
 
-      <div className="pricing-top">
-
-        <button
-          className="back-dashboard"
-          onClick={() => navigate("/dashboard")}
-        >
-          <FaArrowLeft />
-          Dashboard
-        </button>
-
+      <div className="pricing-header">
         <h1>SellAI Pricing</h1>
 
         <p>
-          Choose the best subscription for your business.
+          Choose the perfect plan for your business.
         </p>
 
-      </div>
+        <div className="billing-switch">
 
-      <div className="billing-switch">
+          <button
+            className={billing === "monthly" ? "active" : ""}
+            onClick={() => setBilling("monthly")}
+          >
+            Monthly
+          </button>
 
-        <button
-          className={
-            billing === "monthly"
-              ? "active"
-              : ""
-          }
-          onClick={() =>
-            setBilling("monthly")
-          }
-        >
-          Monthly
-        </button>
+          <button
+            className={billing === "yearly" ? "active" : ""}
+            onClick={() => setBilling("yearly")}
+          >
+            Yearly
+          </button>
 
-        <button
-          className={
-            billing === "yearly"
-              ? "active"
-              : ""
-          }
-          onClick={() =>
-            setBilling("yearly")
-          }
-        >
-          Yearly
-          <span>Save 20%</span>
-        </button>
+        </div>
 
       </div>
 
       <div className="pricing-grid">
 
-        {plans.map((plan) => (
+        {plans.map((item) => (
 
           <div
-            key={plan.id}
+            key={item.id}
             className={`pricing-card ${
-              plan.popular
-                ? "popular"
-                : ""
+              item.popular ? "popular" : ""
             }`}
           >
 
-            {plan.popular && (
-              <div className="popular">
+            {item.popular && (
+              <div className="popular-badge">
                 MOST POPULAR
               </div>
             )}
 
             <div
               className="plan-icon"
-              style={{
-                background:
-                  plan.color,
-              }}
+              style={{ background: item.color }}
             >
-              {plan.icon}
+              {item.icon}
             </div>
 
-            <h2>{plan.title}</h2>
+            <h2>{item.name}</h2>
 
-            <p className="description">
-              {plan.description}
-            </p>
+            <div className="plan-price">
 
-            <div className="price">
+              {billing === "monthly"
+                ? item.price
+                : item.yearly}
 
-              <span>
-
-                $
-
-                {billing === "monthly"
-                  ? plan.monthly
-                  : plan.yearly}
-
-              </span>
-
-              <small>
-
-                /
-
-                {billing === "monthly"
-                  ? "month"
-                  : "year"}
-
-              </small>
-
-            </div>
-
-            <ul>
-
-              {plan.features.map(
-                (item, index) => (
-                  <li key={index}>
-                    <FaCheck />
-                    {item}
-                  </li>
-                )
+              {item.id !== "enterprise" &&
+                item.id !== "free" && (
+                  <span>
+                    /{billing === "monthly"
+                      ? "month"
+                      : "year"}
+                  </span>
               )}
 
-            </ul>
+            </div>
 
-            <button
-              className="subscribe-btn"
-              onClick={() =>
-                subscribe(plan.id)
+            <ul className="features">
+
+              {item.features.map((feature) => (
+                <li key={feature}>
+                  <FaCheck />
+                  {feature}
+                </li>
+              ))}
+
+            </ul>            <button
+              className={
+                plan === item.id
+                  ? "current-plan-btn"
+                  : "upgrade-btn"
               }
+              disabled={plan === item.id}
+              onClick={() => upgradePlan(item.id)}
             >
-              Subscribe
+              {plan === item.id
+                ? "Current Plan"
+                : item.id === "enterprise"
+                ? "Contact Sales"
+                : "Upgrade"}
             </button>
 
           </div>
-
         ))}
 
-      </div>      <section className="pricing-benefits">
+      </div>
+
+      <div className="pricing-footer">
 
         <h2>Why choose SellAI?</h2>
 
-        <div className="benefits-grid">
+        <div className="pricing-benefits">
 
-          <div className="benefit-card">
-            <h3>🤖 AI Assistant</h3>
-
+          <div className="benefit">
+            <h3>🚀 AI Powered</h3>
             <p>
-              Get instant business insights powered
-              by artificial intelligence.
+              Analyze sales, products and customers using AI.
             </p>
           </div>
 
-          <div className="benefit-card">
-            <h3>📊 Advanced Analytics</h3>
-
+          <div className="benefit">
+            <h3>📈 Grow Faster</h3>
             <p>
-              Monitor revenue, profit, customers
-              and sales performance in real time.
+              Increase revenue with intelligent business insights.
             </p>
           </div>
 
-          <div className="benefit-card">
-            <h3>☁ Secure Cloud</h3>
-
+          <div className="benefit">
+            <h3>🔒 Secure</h3>
             <p>
-              Your data is securely stored using
-              Firebase and Cloudinary.
+              Your data is protected with Firebase Authentication and
+              Cloud Firestore.
+            </p>
+          </div>
+
+          <div className="benefit">
+            <h3>⚡ Fast</h3>
+            <p>
+              Modern React architecture with instant performance.
             </p>
           </div>
 
         </div>
 
-      </section>
-
-      <section className="pricing-faq">
-
-        <h2>Frequently Asked Questions</h2>
-
-        <div className="faq-item">
-
-          <h3>Can I cancel anytime?</h3>
-
-          <p>
-            Yes. You can cancel your subscription
-            at any moment from the Billing page.
-          </p>
-
-        </div>
-
-        <div className="faq-item">
-
-          <h3>Is there a free trial?</h3>
-
-          <p>
-            Yes. Every new user starts with the
-            Free plan and can upgrade whenever
-            needed.
-          </p>
-
-        </div>
-
-        <div className="faq-item">
-
-          <h3>Which payment methods are supported?</h3>
-
-          <p>
-            Credit cards, Apple Pay, Google Pay
-            and other Stripe-supported payment
-            methods.
-          </p>
-
-        </div>
-
-      </section>
-
-      <section className="pricing-guarantee">
-
-        <div className="guarantee-box">
-
-          <h2>30-Day Money Back Guarantee</h2>
-
-          <p>
-            If SellAI doesn't help your business,
-            we'll refund your payment within
-            the first 30 days.
-          </p>
-
-        </div>
-
-      </section>
-
-      <footer className="pricing-footer">
-
-        <p>
-          © 2026 SellAI.
-          All rights reserved.
-        </p>
-
-      </footer>
+      </div>
 
     </div>
   );
