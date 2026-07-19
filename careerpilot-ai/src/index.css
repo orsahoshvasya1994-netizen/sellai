@@ -1,0 +1,90 @@
+/* ==========================================
+   SELLAI GLOBAL STYLES
+========================================== */
+
+*,
+*::before,
+*::after{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Inter,Arial,Helvetica,sans-serif;
+    background:#07111f;
+    color:#ffffff;
+    overflow-x:hidden;
+    line-height:1.6;
+}
+
+#root{
+    width:100%;
+    min-height:100vh;
+}
+
+a{
+    color:inherit;
+    text-decoration:none;
+}
+
+ul{
+    list-style:none;
+}
+
+img{
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+
+button{
+    font:inherit;
+    cursor:pointer;
+    border:none;
+    outline:none;
+    transition:.3s;
+}
+
+input,
+textarea{
+    font:inherit;
+    outline:none;
+}
+
+.container{
+    width:min(1300px,90%);
+    margin:0 auto;
+}
+
+section{
+    width:100%;
+}
+
+::selection{
+    background:#4f7cff;
+    color:#ffffff;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#07111f;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#4f7cff;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#3567f0;
+}

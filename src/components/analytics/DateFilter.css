@@ -1,0 +1,29 @@
+.date-filter {
+  display: flex;
+  gap: 12px;
+  margin: 20px 0 30px;
+  flex-wrap: wrap;
+}
+
+.date-filter button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #202b45;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.date-filter button:hover {
+  background: #6d5dfc;
+  transform: translateY(-2px);
+}
+
+.date-filter button.active {
+  background: linear-gradient(135deg, #6d5dfc, #8f7cff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(109, 93, 252, 0.35);
+}

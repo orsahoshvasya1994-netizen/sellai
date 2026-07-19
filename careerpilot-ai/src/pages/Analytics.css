@@ -1,0 +1,173 @@
+.analytics-page{
+    min-height:100vh;
+    background:#0b1120;
+    color:white;
+    padding:30px;
+}
+
+.analytics-header{
+    margin-bottom:35px;
+}
+
+.analytics-header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.analytics-header p{
+    color:#94a3b8;
+    font-size:18px;
+}
+
+.analytics-cards{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.analytics-card{
+    background:#172036;
+    padding:25px;
+    border-radius:18px;
+    transition:.3s;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+.analytics-card:hover{
+    transform:translateY(-6px);
+}
+
+.analytics-card h3{
+    color:#7ea4ff;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.analytics-card h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.analytics-card span{
+    color:#94a3b8;
+}
+
+.analytics-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    margin-bottom:35px;
+}
+
+.analytics-box{
+    background:#172036;
+    border-radius:18px;
+    padding:25px;
+}
+
+.analytics-box h2{
+    margin-bottom:20px;
+}
+
+.fake-chart{
+    height:320px;
+    display:flex;
+    align-items:flex-end;
+    gap:18px;
+}
+
+.bar{
+    flex:1;
+    background:linear-gradient(180deg,#60a5fa,#2563eb);
+    border-radius:12px 12px 0 0;
+    transition:.3s;
+}
+
+.bar:hover{
+    opacity:.8;
+}
+
+.analytics-box ul{
+    list-style:none;
+    padding:0;
+}
+
+.analytics-box li{
+    display:flex;
+    justify-content:space-between;
+    padding:16px 0;
+    border-bottom:1px solid #28324f;
+}
+
+.analytics-box li:last-child{
+    border:none;
+}
+
+.analytics-box span{
+    color:#60a5fa;
+    font-weight:bold;
+}
+
+.analytics-table{
+    background:#172036;
+    border-radius:18px;
+    padding:25px;
+}
+
+.analytics-table h2{
+    margin-bottom:20px;
+}
+
+.analytics-table table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.analytics-table th{
+    padding:18px;
+    background:#22304d;
+    text-align:left;
+    color:#7ea4ff;
+}
+
+.analytics-table td{
+    padding:18px;
+    border-bottom:1px solid #28324f;
+}
+
+.analytics-table tr:hover{
+    background:#1d2942;
+}
+
+@media(max-width:1200px){
+
+.analytics-cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.analytics-grid{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:768px){
+
+.analytics-page{
+padding:20px;
+}
+
+.analytics-cards{
+grid-template-columns:1fr;
+}
+
+.analytics-table{
+overflow-x:auto;
+}
+
+.analytics-table table{
+min-width:700px;
+}
+
+}

@@ -1,0 +1,144 @@
+.products-page {
+  width: 100%;
+  color: white;
+}
+
+/* HEADER */
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.products-header h1 {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.add-product-btn {
+  background: linear-gradient(135deg, #6d5dfc, #4f8cff);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 700;
+  transition: .3s;
+}
+
+.add-product-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(79,140,255,.35);
+}
+
+/* KPI */
+
+.products-stats {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.product-stat {
+  background: #1b2435;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.05);
+}
+
+.product-stat h3 {
+  color: #94a3b8;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.product-stat h2 {
+  font-size: 30px;
+  color: white;
+}
+
+.product-stat span {
+  color: #22c55e;
+}
+
+/* TOOLBAR */
+
+.products-toolbar {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 260px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #1f2937;
+  color: white;
+  font-size: 15px;
+}
+
+.search-input:focus {
+  outline: 2px solid #6d5dfc;
+}
+
+.filter-select {
+  min-width: 180px;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  background: #1f2937;
+  color: white;
+}
+
+/* GRID */
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(320px,1fr));
+  gap: 25px;
+}
+
+/* EMPTY */
+
+.loading {
+  text-align: center;
+  font-size: 22px;
+  margin-top: 80px;
+  color: white;
+}
+
+/* RESPONSIVE */
+
+@media (max-width:1200px){
+
+  .products-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+}
+
+@media (max-width:768px){
+
+  .products-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:20px;
+  }
+
+  .products-stats{
+    grid-template-columns:1fr;
+  }
+
+  .products-toolbar{
+    flex-direction:column;
+  }
+
+}

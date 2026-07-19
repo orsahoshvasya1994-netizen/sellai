@@ -1,0 +1,30 @@
+.revenue-chart-card{
+    background:#161f31;
+    border:1px solid #2b3950;
+    border-radius:22px;
+    padding:25px;
+    transition:.35s;
+}
+
+.revenue-chart-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.chart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.chart-header h2{
+    color:#fff;
+    font-size:26px;
+    margin-bottom:5px;
+}
+
+.chart-header p{
+    color:#9aa4b2;
+    font-size:14px;
+}

@@ -1,0 +1,66 @@
+.confirm-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+}
+
+.confirm-modal{
+  width:430px;
+  background:#151f37;
+  border-radius:18px;
+  padding:35px;
+  box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+
+.confirm-modal h2{
+  color:white;
+  margin-bottom:15px;
+  font-size:28px;
+}
+
+.confirm-modal p{
+  color:#c5cde2;
+  margin-bottom:30px;
+  font-size:18px;
+  line-height:1.5;
+}
+
+.confirm-buttons{
+  display:flex;
+  justify-content:flex-end;
+  gap:15px;
+}
+
+.cancel-delete{
+  background:#475569;
+  color:white;
+  border:none;
+  padding:14px 28px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:16px;
+  transition:.3s;
+}
+
+.cancel-delete:hover{
+  background:#64748b;
+}
+
+.confirm-delete{
+  background:#ef4444;
+  color:white;
+  border:none;
+  padding:14px 28px;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:16px;
+  transition:.3s;
+}
+
+.confirm-delete:hover{
+  background:#dc2626;
+}

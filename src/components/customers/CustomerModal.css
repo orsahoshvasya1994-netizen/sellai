@@ -1,0 +1,190 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 12, 22, 0.75);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 999;
+}
+
+.customer-modal {
+  width: 100%;
+  max-width: 620px;
+  background: #182234;
+  border: 1px solid #2b3a55;
+  border-radius: 22px;
+  padding: 30px;
+  color: #fff;
+  animation: modalShow .25s ease;
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+}
+
+@keyframes modalShow {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(.96);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.customer-modal h2 {
+  margin: 0 0 25px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.customer-modal form {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+}
+
+.customer-modal input,
+.customer-modal select {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #344563;
+  background: #111b2c;
+  color: white;
+  font-size: 15px;
+  transition: .25s;
+}
+
+.customer-modal input::placeholder {
+  color: #8fa2c2;
+}
+
+.customer-modal input:focus,
+.customer-modal select:focus {
+  outline: none;
+  border-color: #6d5dfc;
+  box-shadow: 0 0 0 3px rgba(109,93,252,.25);
+}
+
+.customer-modal select {
+  cursor: pointer;
+}
+
+.customer-modal input[name="avatar"] {
+  grid-column: 1 / -1;
+}.modal-actions {
+  grid-column: 1 / -1;
+
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+
+  margin-top: 10px;
+}
+
+.modal-actions button {
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.cancel-btn {
+  background: #29364d;
+  color: #ffffff;
+}
+
+.cancel-btn:hover:not(:disabled) {
+  background: #354562;
+}
+
+.save-btn {
+  background: linear-gradient(
+    135deg,
+    #6d5dfc,
+    #8b7cff
+  );
+  color: white;
+  box-shadow: 0 10px 25px rgba(109, 93, 252, .35);
+}
+
+.save-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(109, 93, 252, .45);
+}
+
+.modal-actions button:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.customer-modal input:disabled,
+.customer-modal select:disabled {
+  opacity: .7;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+
+  .customer-modal {
+    max-width: 100%;
+    padding: 24px;
+    border-radius: 18px;
+  }
+
+  .customer-modal h2 {
+    font-size: 24px;
+  }
+
+  .customer-modal form {
+    grid-template-columns: 1fr;
+  }
+
+  .customer-modal input[name="avatar"] {
+    grid-column: auto;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .customer-modal {
+    padding: 20px;
+  }
+
+  .customer-modal h2 {
+    font-size: 22px;
+  }
+
+  .customer-modal input,
+  .customer-modal select {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .modal-actions button {
+    padding: 13px;
+    font-size: 14px;
+  }
+}

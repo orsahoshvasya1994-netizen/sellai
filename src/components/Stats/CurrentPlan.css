@@ -1,0 +1,81 @@
+.current-plan {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #1b2435;
+
+  border-radius: 20px;
+
+  padding: 25px 30px;
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  margin-bottom: 30px;
+}
+
+.plan-icon {
+  width: 70px;
+  height: 70px;
+
+  border-radius: 18px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: white;
+
+  font-size: 30px;
+}
+
+.plan-info {
+  flex: 1;
+
+  margin-left: 25px;
+}
+
+.plan-info h2 {
+  color: white;
+
+  margin-bottom: 8px;
+
+  font-size: 28px;
+}
+
+.plan-info p {
+  color: #94a3b8;
+
+  font-size: 15px;
+}
+
+.plan-status {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+@media(max-width:768px){
+
+.current-plan{
+
+flex-direction:column;
+
+text-align:center;
+
+gap:20px;
+
+}
+
+.plan-info{
+
+margin-left:0;
+
+}
+
+}

@@ -1,0 +1,149 @@
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999;
+}
+
+.product-modal {
+  width: 600px;
+  max-width: 95%;
+
+  background: #1f2937;
+
+  border-radius: 18px;
+
+  padding: 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  box-shadow: 0 20px 50px rgba(0,0,0,.45);
+}
+
+.product-modal h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.product-modal input,
+.product-modal textarea {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #111827;
+
+  color: white;
+
+  font-size: 15px;
+}
+
+.product-modal textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.product-modal input:focus,
+.product-modal textarea:focus {
+  outline: 2px solid #7c5cff;
+}
+
+.dropzone {
+  border: 2px dashed #475569;
+
+  border-radius: 12px;
+
+  padding: 30px;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  transition: .3s;
+
+  position: relative;
+}
+
+.dropzone.active {
+  border-color: #7c5cff;
+  background: rgba(124,92,255,.08);
+}
+
+.dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+.dropzone p {
+  color: #94a3b8;
+}
+
+.dropzone img {
+  width: 100%;
+  max-height: 250px;
+
+  object-fit: contain;
+
+  margin-top: 15px;
+
+  border-radius: 10px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.modal-buttons button {
+  border: none;
+
+  padding: 12px 24px;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  font-weight: 600;
+
+  transition: .25s;
+}
+
+.cancel {
+  background: #374151;
+  color: white;
+}
+
+.cancel:hover {
+  background: #4b5563;
+}
+
+.save {
+  background: #7c5cff;
+  color: white;
+}
+
+.save:hover {
+  background: #6948ff;
+}
+
+.save:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}

@@ -1,0 +1,40 @@
+.forecast-card-wrapper {
+    background: #1b2538;
+    border-radius: 18px;
+    padding: 25px;
+    border: 1px solid #2f3c55;
+}
+
+.forecast-card-wrapper h3 {
+    margin-bottom: 25px;
+    color: white;
+    font-size: 24px;
+}
+
+.forecast-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.forecast-item {
+    background: #111827;
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.forecast-item span {
+    color: #94a3b8;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.forecast-item h2 {
+    color: white;
+    font-size: 34px;
+    font-weight: 700;
+}
+
+.forecast-next {
+    color: #28c76f;
+}

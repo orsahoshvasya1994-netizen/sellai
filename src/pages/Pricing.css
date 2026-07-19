@@ -1,0 +1,430 @@
+.pricing-page {
+  min-height: 100vh;
+  padding: 60px 40px;
+  background: #0f172a;
+  color: white;
+}
+
+.pricing-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pricing-header h1 {
+  font-size: 52px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.pricing-header p {
+  font-size: 18px;
+  color: #94a3b8;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 35px;
+  margin-bottom: 60px;
+}
+
+.pricing-card {
+  position: relative;
+  background: #1e293b;
+  border: 1px solid #2b3750;
+  border-radius: 28px;
+  padding: 40px;
+  transition: 0.35s;
+  overflow: hidden;
+}
+
+.pricing-card:hover {
+  transform: translateY(-10px);
+  border-color: #6d5dfc;
+  box-shadow: 0 25px 70px rgba(109, 93, 252, 0.35);
+}
+
+.popular {
+  border: 2px solid #6d5dfc;
+}
+
+.popular-badge {
+  position: absolute;
+  top: 22px;
+  right: -45px;
+  width: 180px;
+  text-align: center;
+  background: linear-gradient(135deg, #6d5dfc, #8b7dff);
+  color: white;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  transform: rotate(45deg);
+}
+
+.plan-icon {
+  width: 75px;
+  height: 75px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 34px;
+  margin-bottom: 25px;
+  color: white;
+}
+
+.pricing-card h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.plan-description {
+  color: #94a3b8;
+  line-height: 1.6;
+  margin-bottom: 35px;
+}
+
+.price {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-bottom: 35px;
+}
+
+.price span {
+  font-size: 56px;
+  font-weight: bold;
+}
+
+.price small {
+  color: #94a3b8;
+  margin-bottom: 10px;
+}
+
+.pricing-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 40px;
+}
+
+.pricing-card li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  color: #e5e7eb;
+  font-size: 16px;
+}
+
+.pricing-card li svg {
+  color: #2ed573;
+  font-size: 18px;
+}
+
+.subscribe-btn {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #6d5dfc, #8b7dff);
+  transition: 0.3s;
+}
+
+.subscribe-btn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 15px 35px rgba(109, 93, 252, 0.45);
+}
+
+.pricing-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.back-btn {
+  padding: 16px 34px;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: 600;
+  color: white;
+  background: #2b3750;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  background: #3a4b6a;
+}
+
+@media (max-width: 900px) {
+  .pricing-page {
+    padding: 40px 20px;
+  }
+
+  .pricing-header h1 {
+    font-size: 40px;
+  }
+
+  .price span {
+    font-size: 46px;
+  }
+
+  .pricing-card {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .pricing-header h1 {
+    font-size: 32px;
+  }
+
+  .pricing-header p {
+    font-size: 15px;
+  }
+
+  .price span {
+    font-size: 40px;
+  }
+
+  .pricing-card {
+    padding: 25px;
+  }
+
+  .plan-icon {
+    width: 65px;
+    height: 65px;
+    font-size: 28px;
+  }
+
+  .pricing-card h2 {
+    font-size: 28px;
+  }
+}/* ==========================
+   BENEFITS
+========================== */
+
+.pricing-benefits {
+  margin-top: 90px;
+}
+
+.pricing-benefits h2 {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 50px;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  gap: 30px;
+}
+
+.benefit-card {
+  background: #1e293b;
+  border: 1px solid #2b3750;
+  border-radius: 24px;
+  padding: 35px;
+  transition: .35s;
+}
+
+.benefit-card:hover {
+  transform: translateY(-8px);
+  border-color: #6d5dfc;
+  box-shadow: 0 20px 45px rgba(109,93,252,.25);
+}
+
+.benefit-card h3 {
+  font-size: 24px;
+  margin-bottom: 18px;
+}
+
+.benefit-card p {
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+/* ==========================
+   FAQ
+========================== */
+
+.pricing-faq {
+  margin-top: 100px;
+}
+
+.pricing-faq h2 {
+  text-align: center;
+  font-size: 42px;
+  margin-bottom: 45px;
+}
+
+.faq-item {
+  background: #1e293b;
+  border: 1px solid #2b3750;
+  border-radius: 18px;
+  padding: 28px;
+  margin-bottom: 22px;
+  transition: .3s;
+}
+
+.faq-item:hover {
+  border-color: #6d5dfc;
+}
+
+.faq-item h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+}
+
+.faq-item p {
+  color: #94a3b8;
+  line-height: 1.7;
+}
+
+/* ==========================
+   GUARANTEE
+========================== */
+
+.pricing-guarantee {
+  margin-top: 90px;
+}
+
+.guarantee-box {
+  background: linear-gradient(135deg,#6d5dfc,#4f8cff);
+  border-radius: 28px;
+  padding: 60px;
+  text-align: center;
+}
+
+.guarantee-box h2 {
+  font-size: 42px;
+  margin-bottom: 20px;
+}
+
+.guarantee-box p {
+  font-size: 18px;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+
+.pricing-footer {
+  margin-top: 90px;
+  padding: 35px 0;
+  border-top: 1px solid #2b3750;
+  text-align: center;
+}
+
+.pricing-footer p {
+  color: #94a3b8;
+  font-size: 15px;
+}
+
+/* ==========================
+   BILLING SWITCH
+========================== */
+
+.billing-switch {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin: 45px 0 60px;
+}
+
+.billing-switch button {
+  background: #1e293b;
+  color: white;
+  border: 1px solid #334155;
+  border-radius: 14px;
+  padding: 15px 32px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: .3s;
+}
+
+.billing-switch button.active {
+  background: linear-gradient(135deg,#6d5dfc,#4f8cff);
+  border-color: transparent;
+}
+
+.billing-switch button span {
+  display: block;
+  font-size: 12px;
+  color: #22c55e;
+  margin-top: 4px;
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width:900px){
+
+  .pricing-header h1,
+  .pricing-benefits h2,
+  .pricing-faq h2,
+  .guarantee-box h2{
+      font-size:34px;
+  }
+
+  .guarantee-box{
+      padding:40px 30px;
+  }
+
+}
+
+@media (max-width:768px){
+
+  .pricing-page{
+      padding:30px 20px;
+  }
+
+  .billing-switch{
+      flex-direction:column;
+      align-items:center;
+  }
+
+  .pricing-grid{
+      grid-template-columns:1fr;
+  }
+
+  .benefits-grid{
+      grid-template-columns:1fr;
+  }
+
+}
+
+@media (max-width:480px){
+
+  .pricing-header h1{
+      font-size:28px;
+  }
+
+  .price span{
+      font-size:42px;
+  }
+
+  .pricing-card{
+      padding:25px;
+  }
+
+  .benefit-card,
+  .faq-item{
+      padding:22px;
+  }
+
+  .guarantee-box{
+      padding:30px 20px;
+  }
+
+}

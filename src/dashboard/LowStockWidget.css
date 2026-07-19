@@ -1,0 +1,59 @@
+.low-stock-card{
+    background:#1b2435;
+    border-radius:20px;
+    padding:25px;
+    border:1px solid rgba(255,255,255,.06);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
+}
+
+.low-stock-header{
+    margin-bottom:25px;
+}
+
+.low-stock-header h2{
+    color:white;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.low-stock-header svg{
+    color:#f59e0b;
+}
+
+.stock-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.stock-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.stock-left svg{
+    color:#7c5cff;
+    font-size:24px;
+}
+
+.stock-left h4{
+    color:white;
+    margin:0;
+}
+
+.stock-left p{
+    color:#94a3b8;
+    margin-top:4px;
+}
+
+.danger{
+    background:#ef4444;
+    color:white;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:700;
+}

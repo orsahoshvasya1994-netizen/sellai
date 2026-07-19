@@ -1,0 +1,173 @@
+.order-card {
+  background: #1b2435;
+  border-radius: 22px;
+  padding: 24px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  border: 1px solid rgba(255,255,255,.05);
+  transition: .35s;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+.order-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 45px rgba(0,0,0,.45);
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
+
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.order-top h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  font-size: 23px;
+  font-weight: 700;
+}
+
+.order-top p {
+  color: #94a3b8;
+  margin-top: 8px;
+}
+
+/* ========================= */
+/* STATUS */
+/* ========================= */
+
+.status {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+}
+
+.pending {
+  background: #3b82f6;
+}
+
+.processing {
+  background: #f59e0b;
+}
+
+.shipping {
+  background: #8b5cf6;
+}
+
+.completed {
+  background: #22c55e;
+}
+
+.cancelled {
+  background: #ef4444;
+}
+
+/* ========================= */
+/* DETAILS */
+/* ========================= */
+
+.order-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #cbd5e1;
+  font-size: 15px;
+}
+
+.detail svg {
+  color: #6d5dfc;
+  min-width: 18px;
+}
+
+.detail span {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.detail strong {
+  color: white;
+  margin-left: 8px;
+}
+
+/* ========================= */
+/* BUTTONS */
+/* ========================= */
+
+.order-buttons {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.order-buttons button {
+  flex: 1;
+  border: none;
+  border-radius: 12px;
+  padding: 13px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  transition: .3s;
+}
+
+.edit-btn {
+  background: linear-gradient(135deg,#6d5dfc,#4f8cff);
+  color: white;
+}
+
+.edit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(79,140,255,.35);
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #dc2626;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width:768px) {
+
+  .order-top {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .order-buttons {
+    flex-direction: column;
+  }
+
+  .detail span {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+}

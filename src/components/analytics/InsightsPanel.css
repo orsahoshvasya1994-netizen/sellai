@@ -1,0 +1,30 @@
+.insights-panel {
+  background: #1a2236;
+  border-radius: 20px;
+  padding: 25px;
+  border: 1px solid #2b3553;
+}
+
+.insights-panel h3 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.insight-card {
+  background: #101827;
+  color: white;
+  padding: 16px;
+  border-radius: 14px;
+  border-left: 5px solid #6d5dfc;
+  transition: .3s;
+}
+
+.insight-card:hover {
+  transform: translateX(6px);
+}
