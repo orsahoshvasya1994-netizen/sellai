@@ -1,7 +1,16 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { doc, setDoc, serverTimestamp } from "firebase/firestore";
 import { Link, useNavigate } from "react-router-dom";
+
+import {
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+
+import {
+  doc,
+  setDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 import { auth, db } from "../firebase";
 
@@ -19,162 +28,157 @@ export default function Register() {
   const [error, setError] = useState("");
 
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  const handleRegister = async (e) => {
+  async function handleSubmit(e) {
     e.preventDefault();
 
     setError("");
 
     if (!name.trim()) {
-      setError("Введіть ім'я.");
-      return;
+      return setError("Введіть ім'я");
+    }
+
+    if (!email.trim()) {
+      return setError("Введіть email");
     }
 
     if (password.length < 6) {
-      setError("Пароль повинен містити мінімум 6 символів.");
-      return;
+      return setError("Пароль повинен містити мінімум 6 символів");
     }
 
     if (password !== confirmPassword) {
-      setError("Паролі не співпадають.");
-      return;
+      return setError("Паролі не співпадають");
     }
 
     try {
       setLoading(true);
 
-      const userCredential =
+      const result =
         await createUserWithEmailAndPassword(
           auth,
           email,
           password
         );
 
-      const user = userCredential.user;
-
-      await updateProfile(user, {
+      await updateProfile(result.user, {
         displayName: name,
       });
 
-      await setDoc(doc(db, "users", user.uid), {
-        uid: user.uid,
+      await setDoc(doc(db, "users", result.user.uid), {
+        uid: result.user.uid,
         name,
         email,
-        role: "user",
         createdAt: serverTimestamp(),
       });
 
-      navigate("/");
+      navigate("/dashboard");
     } catch (err) {
-      console.error(err);
-
       switch (err.code) {
         case "auth/email-already-in-use":
-          setError("Ця електронна пошта вже використовується.");
+          setError("Такий email вже використовується.");
           break;
 
         case "auth/invalid-email":
-          setError("Невірний формат Email.");
+          setError("Невірний email.");
           break;
 
         case "auth/weak-password":
-          setError("Пароль занадто слабкий.");
+          setError("Пароль занадто простий.");
           break;
 
         default:
-          setError("Помилка реєстрації.");
+          setError(err.message);
       }
     } finally {
       setLoading(false);
     }
-  };
-
-  return (
+  }  return (
     <div className="register-page">
       <div className="register-card">
 
-        <h1>SellAI</h1>
-        <h2>Створити акаунт</h2>
+        <div className="register-logo">
+          <h1>SellAI</h1>
+          <p>Створіть акаунт та почніть працювати</p>
+        </div>
 
-        {error && (
-          <div className="register-error">
-            {error}
+        <form onSubmit={handleSubmit} className="register-form">
+
+          <div className="form-group">
+            <label>Ім'я</label>
+
+            <input
+              type="text"
+              placeholder="Ваше ім'я"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-        )}
 
-        <form onSubmit={handleRegister}>
+          <div className="form-group">
+            <label>Email</label>
 
-          <input
-            type="text"
-            placeholder="Ім'я"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
+            <input
+              type="email"
+              placeholder="example@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+          <div className="form-group">
+            <label>Пароль</label>
 
-          <div className="password-box">
+            <div className="password-box">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+
+              <button
+                type="button"
+                className="show-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Приховати" : "Показати"}
+              </button>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>Підтвердіть пароль</label>
+
             <input
               type={showPassword ? "text" : "password"}
-              placeholder="Пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-
-            <button
-              type="button"
-              className="show-btn"
-              onClick={() =>
-                setShowPassword(!showPassword)
-              }
-            >
-              {showPassword ? "🙈" : "👁"}
-            </button>
-          </div>
-
-          <div className="password-box">
-            <input
-              type={showConfirmPassword ? "text" : "password"}
-              placeholder="Підтвердіть пароль"
+              placeholder="********"
               value={confirmPassword}
-              onChange={(e) =>
-                setConfirmPassword(e.target.value)
-              }
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
-
-            <button
-              type="button"
-              className="show-btn"
-              onClick={() =>
-                setShowConfirmPassword(!showConfirmPassword)
-              }
-            >
-              {showConfirmPassword ? "🙈" : "👁"}
-            </button>
           </div>
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
 
           <button
-            type="submit"
             className="register-btn"
             disabled={loading}
           >
-            {loading ? "Створення..." : "Зареєструватися"}
+            {loading ? "Створення..." : "Створити акаунт"}
           </button>
 
         </form>
 
-        <p>
-          Вже є акаунт?{" "}
+        <div className="register-footer">
+          Вже маєте акаунт?
+
           <Link to="/login">
             Увійти
           </Link>
-        </p>
+        </div>
 
       </div>
     </div>

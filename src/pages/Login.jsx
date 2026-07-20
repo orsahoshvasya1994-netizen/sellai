@@ -10,17 +10,41 @@ export default function Login() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const login = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
 
       navigate("/dashboard");
     } catch (error) {
-      alert(error.message);
+      switch (error.code) {
+        case "auth/user-not-found":
+          alert("Користувача не знайдено.");
+          break;
+
+        case "auth/wrong-password":
+          alert("Невірний пароль.");
+          break;
+
+        case "auth/invalid-credential":
+          alert("Невірний email або пароль.");
+          break;
+
+        case "auth/invalid-email":
+          alert("Некоректний email.");
+          break;
+
+        default:
+          alert(error.message);
+      }
     }
+
+    setLoading(false);
   };
 
   return (
@@ -46,7 +70,9 @@ export default function Login() {
           required
         />
 
-        <button type="submit">Увійти</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Вхід..." : "Увійти"}
+        </button>
 
         <p className="register">
           Немає акаунта?
